@@ -1,6 +1,6 @@
 # Based on td-hm_hrnet-w48_8xb64-210e_ap10k-256x256.py
 
-_base_ = ['../../../configs/_base_/default_runtime.py']
+_base_ = ['../../mmpose/configs/_base_/default_runtime.py']
 
 
 # Custom variables
