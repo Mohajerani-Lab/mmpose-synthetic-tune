@@ -4,12 +4,12 @@ _base_ = ['../../../configs/_base_/default_runtime.py']
 
 
 # Custom variables
-max_batch_size = 16
+max_batch_size = 64
 max_num_workers = 4
 
 
 # runtime
-train_cfg = dict(max_epochs=500, val_interval=100)
+train_cfg = dict(max_epochs=210, val_interval=10)
 
 # optimizer
 optim_wrapper = dict(optimizer=dict(
@@ -25,7 +25,7 @@ param_scheduler = [
     dict(
         type='MultiStepLR',
         begin=0,
-        end=500,
+        end=210,
         milestones=[170, 200],
         gamma=0.1,
         by_epoch=True)
@@ -79,7 +79,7 @@ model = dict(
                 num_channels=(48, 96, 192, 384))),
         init_cfg=dict(
             type='Pretrained',
-            checkpoint='mmpose-synthetic-tune/models/pretrained-base-hrnet_w48-8ef0771d/hrnet_w48-8ef0771d.pth',
+            checkpoint='models/pretrained-base-hrnet_w48-8ef0771d/hrnet_w48-8ef0771d.pth',
             ),
     ),
     head=dict(
@@ -98,7 +98,7 @@ model = dict(
 # base dataset settings
 dataset_type = 'CocoDataset'
 data_mode = 'topdown'
-data_root = 'mmpose-synthetic-tune/dataset-coco/data/20kp/'
+data_root = 'dataset-coco/data/20kp/'
 
 # pipelines
 train_pipeline = [
@@ -130,7 +130,7 @@ train_dataloader = dict(
         data_mode=data_mode,
         ann_file='annotations/20kp-train.json',
         data_prefix=dict(img='images'),
-        metainfo=dict(from_file='mmpose-synthetic-tune/dataset-coco/custom-configs/20kp.py'),
+        metainfo=dict(from_file='dataset-coco/custom-configs/20kp.py'),
         pipeline=train_pipeline,
     ))
 val_dataloader = dict(
@@ -145,7 +145,7 @@ val_dataloader = dict(
         data_mode=data_mode,
         ann_file='annotations/20kp-validation.json',
         data_prefix=dict(img='images'),
-        metainfo=dict(from_file='mmpose-synthetic-tune/dataset-coco/custom-configs/20kp.py'),
+        metainfo=dict(from_file='dataset-coco/custom-configs/20kp.py'),
         test_mode=True,
         pipeline=val_pipeline,
     ))
@@ -161,7 +161,7 @@ test_dataloader = dict(
         data_mode=data_mode,
         ann_file='annotations/20kp-test.json',
         data_prefix=dict(img='images'),
-        metainfo=dict(from_file='mmpose-synthetic-tune/dataset-coco/custom-configs/20kp.py'),
+        metainfo=dict(from_file='dataset-coco/custom-configs/20kp.py'),
         test_mode=True,
         pipeline=val_pipeline,
     ))

@@ -1,3 +1,6 @@
+mmdetection
+mmpose
+checkpoints
 models/
 .idea
 .ipynb_checkpoints
