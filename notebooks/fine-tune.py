@@ -2,7 +2,8 @@
 from mmpose.apis import MMPoseInferencer
 from datetime import datetime
 import subprocess
-
+import os
+os.chdir('../..')
 
 class MMPoseModelCoach:
     command = 'python'
@@ -57,10 +58,17 @@ class MMPoseModelCoach:
 
 #%%
 base_hrnet = MMPoseModelCoach(
-    config='cow-20kp-base-hrnet.py',
+    config='cow20kp-base-hrnet.py',
     notes='base-hrnet'
 )
 base_hrnet.train()
+
+#%%
+
+base_hrnet.visualize_results(
+    model_ckpt='best_coco_AP_epoch_20.pth',
+    vis_input='mmpose-synthetic-tune/dataset-coco/data/20kp/images/test'
+)
 
 #%%
 base_apk10k = MMPoseModelCoach(

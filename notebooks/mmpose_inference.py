@@ -19,10 +19,10 @@ hrnet = dict(
     pose2d          = f'{hrnet_path}/td-hm_hrnet-w48_8xb64-210e_ap10k-256x256.py',
     pose2d_weights  = f'{hrnet_path}/hrnet_w48-8ef0771d.pth'
 )
-cow20k_path = '../../mmpose-synthetic-tune/models/_train-2024-04-15_10-17-13-base-hrnet'
+cow20k_path = '../../mmpose-synthetic-tune/models/_train-2024-04-15_10-51-49-base-ap10k'
 cow20k = dict(
     pose2d          = f'{cow20k_path}/td-hm_hrnet-w48_8xb64-210e_20kp-256x256.py',
-    pose2d_weights  = f'{cow20k_path}/epoch_210.pth',
+    pose2d_weights  = f'{cow20k_path}/last_checkpoint',
 )
 
 detector_model      = rtmdet
