@@ -1,4 +1,6 @@
 models/
 .idea
+.ipynb_checkpoints
+
 *.png
 *.pth
