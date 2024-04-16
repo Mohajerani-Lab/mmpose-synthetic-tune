@@ -9,7 +9,7 @@ max_num_workers = 4
 
 
 # runtime
-train_cfg = dict(max_epochs=210, val_interval=10)
+train_cfg = dict(max_epochs=500, val_interval=10)
 
 # optimizer
 optim_wrapper = dict(optimizer=dict(
@@ -143,7 +143,7 @@ val_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         data_mode=data_mode,
-        ann_file='annotations/20kp-test.json',
+        ann_file='annotations/20kp-validation.json',
         data_prefix=dict(img='images'),
         metainfo=dict(from_file='mmpose-synthetic-tune/dataset-coco/custom-configs/20kp.py'),
         test_mode=True,
@@ -159,7 +159,7 @@ test_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         data_mode=data_mode,
-        ann_file='annotations/20kp-validation.json',
+        ann_file='annotations/20kp-test.json',
         data_prefix=dict(img='images'),
         metainfo=dict(from_file='mmpose-synthetic-tune/dataset-coco/custom-configs/20kp.py'),
         test_mode=True,
@@ -169,7 +169,7 @@ test_dataloader = dict(
 # evaluators
 val_evaluator = dict(
     type='CocoMetric',
-    ann_file=data_root + 'annotations/20kp-test.json')
+    ann_file=data_root + 'annotations/20kp-validation.json')
 test_evaluator = dict(
     type='CocoMetric',
-    ann_file=data_root + 'annotations/20kp-validation.json')
+    ann_file=data_root + 'annotations/20kp-test.json')
