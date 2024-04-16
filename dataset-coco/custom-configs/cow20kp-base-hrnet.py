@@ -9,7 +9,7 @@ max_num_workers = 4
 
 
 # runtime
-train_cfg = dict(max_epochs=500, val_interval=10)
+train_cfg = dict(max_epochs=500, val_interval=100)
 
 # optimizer
 optim_wrapper = dict(optimizer=dict(
@@ -25,7 +25,7 @@ param_scheduler = [
     dict(
         type='MultiStepLR',
         begin=0,
-        end=210,
+        end=500,
         milestones=[170, 200],
         gamma=0.1,
         by_epoch=True)
