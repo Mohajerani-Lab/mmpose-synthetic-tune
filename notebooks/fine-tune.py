@@ -33,7 +33,7 @@ class MMPoseModelCoach:
     def train(self):
         subprocess.run(self.args)
 
-    def visualize_results(self, model_ckpt, vis_input):
+    def visualize_results(self, model_ckpt, vis_input, radius=3, thickness=1):
         poser_model = {
             "pose2d": f'{self.work_dir}/{self.config}',
             "pose2d_weights": f'{self.work_dir}/{model_ckpt}',
@@ -46,8 +46,8 @@ class MMPoseModelCoach:
 
         result_generator = inferencer(
             input_path,
-            radius=3,
-            thickness=1,
+            radius=radius,
+            thickness=thickness,
             vis_out_dir=output_path,
             draw_heatmap=True,
             det_cat_ids=5
