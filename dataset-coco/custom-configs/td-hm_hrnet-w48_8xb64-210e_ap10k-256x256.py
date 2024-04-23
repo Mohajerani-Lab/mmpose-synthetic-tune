@@ -1,12 +1,4 @@
-# Based on td-hm_hrnet-w48_8xb64-210e_ap10k-256x256.py
-
-_base_ = ['mmpose/configs/_base_/default_runtime.py']
-
-
-# Custom variables
-max_batch_size = 16
-max_num_workers = 4
-
+_base_ = ['../../mmpose/configs/_base_/default_runtime.py']
 
 # runtime
 train_cfg = dict(max_epochs=210, val_interval=10)
@@ -79,8 +71,8 @@ model = dict(
                 num_channels=(48, 96, 192, 384))),
         init_cfg=dict(
             type='Pretrained',
-            checkpoint='models/pretrained-hrnet_w48_ap10k_256x256-d95ab412_20211029/hrnet_w48_ap10k_256x256-d95ab412_20211029.pth',
-            ),
+            checkpoint='https://download.openmmlab.com/mmpose/'
+            'pretrain_models/hrnet_w48-8ef0771d.pth'),
     ),
     head=dict(
         type='HeatmapHead',
@@ -96,9 +88,9 @@ model = dict(
     ))
 
 # base dataset settings
-dataset_type = 'CocoDataset'
+dataset_type = 'AP10KDataset'
 data_mode = 'topdown'
-data_root = 'dataset-coco/data/sample-10/'
+data_root = '/home/galiold/projects/datasets/ap10k/'
 
 # pipelines
 train_pipeline = [
@@ -120,22 +112,21 @@ val_pipeline = [
 
 # data loaders
 train_dataloader = dict(
-    batch_size=max_batch_size,
-    num_workers=max_num_workers,
+    batch_size=64,
+    num_workers=4,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=dict(
         type=dataset_type,
         data_root=data_root,
         data_mode=data_mode,
-        ann_file='annotations/sample10_ap10k_train.json',
-        data_prefix=dict(img='images'),
-        metainfo=dict(from_file='dataset-coco/custom-configs/ap10k.py'),
+        ann_file='annotations/ap10k-train-split1.json',
+        data_prefix=dict(img='data/'),
         pipeline=train_pipeline,
     ))
 val_dataloader = dict(
-    batch_size=max_batch_size//2,
-    num_workers=max_num_workers,
+    batch_size=32,
+    num_workers=4,
     persistent_workers=True,
     drop_last=False,
     sampler=dict(type='DefaultSampler', shuffle=False, round_up=False),
@@ -143,15 +134,14 @@ val_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         data_mode=data_mode,
-        ann_file='annotations/sample10_ap10k_val.json',
-        data_prefix=dict(img='images'),
-        metainfo=dict(from_file='dataset-coco/custom-configs/ap10k.py'),
+        ann_file='annotations/ap10k-val-split1.json',
+        data_prefix=dict(img='data/'),
         test_mode=True,
         pipeline=val_pipeline,
     ))
 test_dataloader = dict(
-    batch_size=max_batch_size//2,
-    num_workers=max_num_workers,
+    batch_size=32,
+    num_workers=4,
     persistent_workers=True,
     drop_last=False,
     sampler=dict(type='DefaultSampler', shuffle=False, round_up=False),
@@ -159,9 +149,8 @@ test_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         data_mode=data_mode,
-        ann_file='annotations/sample10_ap10k_val.json',
-        data_prefix=dict(img='images'),
-        metainfo=dict(from_file='dataset-coco/custom-configs/ap10k.py'),
+        ann_file='annotations/ap10k-test-split1.json',
+        data_prefix=dict(img='data/'),
         test_mode=True,
         pipeline=val_pipeline,
     ))
@@ -169,7 +158,7 @@ test_dataloader = dict(
 # evaluators
 val_evaluator = dict(
     type='CocoMetric',
-    ann_file=data_root + 'annotations/sample10_ap10k_val.json')
+    ann_file=data_root + 'annotations/ap10k-val-split1.json')
 test_evaluator = dict(
     type='CocoMetric',
-    ann_file=data_root + 'annotations/sample10_ap10k_val.json')
+    ann_file=data_root + 'annotations/ap10k-test-split1.json')

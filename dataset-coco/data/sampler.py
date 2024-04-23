@@ -44,7 +44,7 @@ def add_previous_annotations(samples, out_dir):
         new_images.append(prev_image)
         new_annots.append(prev_annots[idx])
 
-    print(f'Found {len(new_images)} frames already labeled')
+    print(f'{len(new_images)}/{len(samples)} frames already labeled')
 
     prev_labels['images'] = new_images
     prev_labels['annotations'] = new_annots

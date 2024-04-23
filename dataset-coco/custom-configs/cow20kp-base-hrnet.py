@@ -4,7 +4,7 @@ _base_ = ['../../mmpose/configs/_base_/default_runtime.py']
 
 
 # Custom variables
-max_batch_size = 64
+max_batch_size = 16
 max_num_workers = 4
 
 
