@@ -1,3 +1,6 @@
+batch_size = 16
+sample_name = 'sample80'
+
 _base_ = ['../../mmpose/configs/_base_/default_runtime.py']
 
 # runtime
@@ -91,9 +94,9 @@ model = dict(
 )
 
 # base dataset settings
-dataset_type = 'AP10KDataset'
+dataset_type = 'CocoDataset'
 data_mode = 'topdown'
-data_root = '/home/galiold/projects/datasets/sample-10/'
+data_root = '/home/galiold/projects/datasets/cow-coco/'
 
 # pipelines
 train_pipeline = [
@@ -115,7 +118,7 @@ val_pipeline = [
 
 # data loaders
 train_dataloader = dict(
-    batch_size=16,
+    batch_size=batch_size,
     num_workers=4,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
@@ -123,13 +126,13 @@ train_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         data_mode=data_mode,
-        ann_file='annotations/train_20kp_sample10.json',
-        data_prefix=dict(img='data/'),
+        ann_file=f'annotations/20kp_{sample_name}_train.json',
+        data_prefix=dict(img=f'20kp_{sample_name}_data/'),
         metainfo=dict(from_file='dataset-coco/custom-configs/20kp.py'),
         pipeline=train_pipeline,
     ))
 val_dataloader = dict(
-    batch_size=8,
+    batch_size=batch_size//2,
     num_workers=4,
     persistent_workers=True,
     drop_last=False,
@@ -138,14 +141,14 @@ val_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         data_mode=data_mode,
-        ann_file='annotations/val_20kp_sample10.json',
-        data_prefix=dict(img='data/'),
+        ann_file=f'annotations/20kp_{sample_name}_val.json',
+        data_prefix=dict(img=f'20kp_{sample_name}_data/'),
         metainfo=dict(from_file='dataset-coco/custom-configs/20kp.py'),
         test_mode=True,
         pipeline=val_pipeline,
     ))
 test_dataloader = dict(
-    batch_size=8,
+    batch_size=batch_size//2,
     num_workers=4,
     persistent_workers=True,
     drop_last=False,
@@ -154,8 +157,8 @@ test_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         data_mode=data_mode,
-        ann_file='annotations/val_20kp_sample10.json',
-        data_prefix=dict(img='data/'),
+        ann_file=f'annotations/20kp_{sample_name}_val.json',
+        data_prefix=dict(img=f'20kp_{sample_name}_data/'),
         metainfo=dict(from_file='dataset-coco/custom-configs/20kp.py'),
         test_mode=True,
         pipeline=val_pipeline,
@@ -164,7 +167,7 @@ test_dataloader = dict(
 # evaluators
 val_evaluator = dict(
     type='CocoMetric',
-    ann_file=data_root + 'annotations/val_20kp_sample10.json')
+    ann_file=data_root + f'annotations/20kp_{sample_name}_val.json')
 test_evaluator = dict(
     type='CocoMetric',
-    ann_file=data_root + 'annotations/val_20kp_sample10.json')
+    ann_file=data_root + f'annotations/20kp_{sample_name}_val.json')
