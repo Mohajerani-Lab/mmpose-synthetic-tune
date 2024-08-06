@@ -96,7 +96,7 @@ model = dict(
 # base dataset settings
 dataset_type = 'CocoDataset'
 data_mode = 'topdown'
-data_root = r'C:\\Users\\a.goldani\\projects\\mmpose-synthetic-tune-datasets\\cow-coco\\'
+data_root = '/workspace/datasets/cow-coco/'
 
 # pipelines
 train_pipeline = [
