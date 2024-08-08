@@ -1,4 +1,5 @@
 scene_settings = [
+    # Scene 0
     {
         'collection': 'scene0',
         'background': {
@@ -14,13 +15,14 @@ scene_settings = [
             'rotation_euler': [1.4630913734436035, -5.920300338857487e-08, 1.5707963705062866]
         }
     },
+    # Scene 2
     {
         'collection': 'scene2',
         'background': {
             'file': r'c:\Users\Ali Goldani\projects-win\blender\Blender_Reqs\backgrounds\2.png'
         },
         'env': {
-            'file': r'c:\Users\Ali Goldani\projects-win\blender\Blender_Reqs\HDRIs\evening_meadow_4k.exr',
+            'file': r'c:\Users\Ali Goldani\projects-win\blender\Blender_Reqs\HDRIs\overcast_soil_puresky_4k.exr',
             'rotation_euler': [1.2042770385742188, 1.9582593441009521, 0.0],
             'strength': 5.0
         },
@@ -28,7 +30,22 @@ scene_settings = [
             'location': [11.108087539672852, -1.7524324655532837, 1.9575519561767578],
             'rotation_euler': [1.457517385482788, -5.890601784130922e-08, 1.5707963705062866]
         }
-    }
+    },
+    # Scene 3
+    {'collection': 'scene3',
+ 'background': {'file': 'C:\\Users\\Ali '
+                        'Goldani\\projects-win\\blender\\Blender_Reqs\\backgrounds\\3.png'},
+ 'env': {'file': 'C:\\Users\\Ali '
+                 'Goldani\\projects-win\\blender\\Blender_Reqs\\HDRIs\\scythian_tombs_2_4k.exr',
+         'rotation_euler': [0.7679448127746582, 0.3490658402442932, 0.0],
+         'strength': 1.0},
+ 'camera': {'location': [8.086649894714355,
+                         -2.374967098236084,
+                         1.6400210857391357],
+            'rotation_euler': [1.4844555854797363,
+                               -6.006775521427699e-08,
+                               1.5707963705062866]}},
+                               
 ]
 
 frames_to_render = [0]
