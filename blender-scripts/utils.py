@@ -4,6 +4,9 @@ import json
 def get_scene_properties(scene_number):
     scene_settings = {
         'collection': f'scene{scene_number}',
+        'cow_root': {
+            'rotation_quaternion': list(D.objects['BlackCattle_Rig_grp'].pose.bones['Root'].rotation_quaternion)
+        },
         'background': {
             'file': D.cameras['Camera'].background_images[0].image.filepath_from_user()
         },

@@ -4,6 +4,7 @@ checkpoints
 models/
 .idea
 .ipynb_checkpoints
+__pycache__
 
 *.png
 *.pth
